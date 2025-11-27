@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир кино - Всё о кинематографе</title>
+    <link rel="icon" href="D:/1920x (1).png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ВСЕ СУЩЕСТВУЮЩИЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background-color: #0a0a1a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5));
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #e50914;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        
+        nav ul li a:hover {
+            color: #e50914;
+        }
+
+        /* Стили для уведомлений в навигации */
+        .nav-notifications {
+            position: relative;
+        }
+
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #fff;
+            transition: color 0.3s;
+            padding: 5px;
+        }
+
+        .notification-icon:hover {
+            color: #e50914;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e50914;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 320px;
+            background: #1a1a2e;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            margin-top: 15px;
+        }
+
+        .nav-notifications:hover .notification-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .notification-dropdown::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            right: 15px;
+            border: 8px solid transparent;
+            border-bottom-color: #1a1a2e;
+        }
+
+        .notification-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #2a2a3e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-header h3 {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #2a2a3e;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .notification-item:hover {
+            background: #2a2a3e;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .notification-message {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .notification-unread {
+            background: rgba(229, 9, 20, 0.1);
+            border-left: 3px solid #e50914;
+        }
+
+        .notification-unread .notification-title {
+            color: #e50914;
+        }
+
+        .view-all {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: #0f0f1f;
+            color: #e50914;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0 0 10px 10px;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .view-all:hover {
+            background: #2a2a3e;
+        }
+
+        /* Остальные существующие стили остаются без изменений */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.pinimg.com/originals/2b/8d/7b/2b8d7b2997b4759281fd3d727a99a683.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e50914;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background: #ff0a16;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #e50914;
+        }
+        
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .movie-card {
+            background: #1a1a2e;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-img {
+            height: 380px;
+            overflow: hidden;
+        }
+        
+        .movie-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .movie-card:hover .movie-img img {
+            transform: scale(1.1);
+        }
+        
+        .movie-info {
+            padding: 20px;
+        }
+        
+        .movie-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .movie-info p {
+            color: #aaa;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            color: #ffc107;
+        }
+        
+        .rating i {
+            margin-right: 5px;
+        }
+        
+        .genres {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .genre {
+            background: #16213e;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .actors {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .actor {
+            text-align: center;
+            width: 150px;
+        }
+        
+        .actor-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            border: 3px solid #e50914;
+        }
+        
+        .actor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .news-card {
+            background: #1a1a2e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .news-img {
+            height: 200px;
+        }
+        
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .news-info {
+            padding: 20px;
+        }
+        
+        .news-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .news-info p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        
+        .contact-content {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: #1a1a2e;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #0f0f1f;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .info-box {
+            background: #1a1a2e;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 15px;
+            color: #e50914;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0f0f1f;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #e50914;
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            background: #0c0c1c;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #e50914;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-left: 25px;
+        }
+        
+        .footer-links li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links li a:hover {
+            color: #e50914;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .actor-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.actor-link:hover {
+    transform: translateY(-5px);
+}
+
+.actor-link:hover .actor-img {
+    box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+}
+
+.actor {
+    text-align: center;
+    width: 150px;
+}
+
+.actor-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    border: 3px solid #e50914;
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.actor-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.actor-link:hover .actor-img img {
+    transform: scale(1.1);
+}
+
+.actor h3 {
+    margin-top: 10px;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.actor-link:hover h3 {
+    color: #e50914;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.news-card {
+    background: #1a1a2e;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: inherit;
+}
+
+.news-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.news-card:hover .news-img img {
+    transform: scale(1.1);
+}
+
+.news-info {
+    padding: 20px;
+}
+
+.news-info h3 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.news-info p {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline-block;
+    background: #e50914;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.news-card:hover .btn {
+    background: #ff0a16;
+}
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                margin-top: 20px;
+            }
+
+            .notification-dropdown {
+                right: -50px;
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-film"></i>Мир Кино
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#movies">Фильмы</a></li>
+                        <li><a href="#about">О проекте</a></li>
+                        <li><a href="#news">Новости</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                        <!-- Добавляем иконку уведомлений в навигацию -->
+                        <li class="nav-notifications">
+                            <div class="notification-icon">
+                                <i class="fas fa-bell"></i>
+                                <span class="notification-badge" id="notification-counter">0</span>
+                            </div>
+                            <div class="notification-dropdown">
+                                <div class="notification-header">
+                                    <h3>Уведомления</h3>
+                                    <span class="notification-time" id="unread-count">0 новых</span>
+                                </div>
+                                <div class="notification-list" id="notification-list">
+                                    <!-- Уведомления будут добавляться динамически -->
+                                    <div class="notification-item">
+                                        <div class="notification-message" style="text-align: center; color: #666;">
+                                            Уведомлений пока нет
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="view-all" id="mark-all-read">Пометить все как прочитанные</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Весь остальной HTML код остается без изменений -->
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Откройте для себя мир кинематографа</h1>
+                <p>Узнавайте о новинках кино, читайте интересные статьи и находите вдохновение в мире большого кино</p>
+                <a href="#movies" class="btn">Смотреть подборку</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Movies Section -->
+    <section id="movies">
+        <div class="container">
+            <div class="section-title">
+                <h2>Популярные кинокартины</h2>
+            </div>
+            <div class="movies-grid">
+                <!-- Movie 1 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="http://images-s.kinorium.com/movie/poster/573759/w1500_41129997.jpg" alt="Фильм 1">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Бегущий по лезвию 2049</h3>
+                        <p>Фантастический боевик о будущем, где человекоподобные роботы сосуществуют с людьми.</p>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.0/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Фантастика</span>
+                            <span class="genre">Боевик</span>
+                            <span class="genre">Драма</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Старница 1.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Movie 2 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/0fa5bf50-d5ad-446f-a599-b26d070c8b99/600x900" alt="Фильм 2">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Трилогия о Тёмном рыцаре</h3>
+                        <p>Серия супергеройских боевиков с элементами неонуара режиссёра Кристофера Нолана по комиксам DC Comics.</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.9/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Драма</span>
+                            <span class="genre">Боевик</span>
+                            <span class="genre">Супергероика</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Страница 2.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Movie 3 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://avatars.mds.yandex.net/get-mpic/15608342/2a00000196d897d0a6fe958bd08f4ed89912/orig" alt="Фильм 3">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Властелин Колец</h3>
+                        <p>Эпическое путешествие по Средиземью с целью уничтожения Кольца Всевластия.</p>
+                        <br>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.9/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Фэнтези</span>
+                            <span class="genre">Приключения</span>
+                            <span class="genre">Экшен</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Страница 4.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Movie 4 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://avatars.mds.yandex.net/i?id=960c5c4188ac6e41935c0048d0b8ae43aa40ed74-9570000-images-thumbs&n=13" alt="Фильм 4">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Сияние</h3>
+                        <p>Писатель с семьей переезжает в отдаленный отель, где на него влияют сверхъестественные силы.</p>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.4/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Ужасы</span>
+                            <span class="genre">Драма</span>
+                            <span class="genre">Мистика</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Старница 3.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Movie 5 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://i.pinimg.com/736x/6a/43/4d/6a434dd2b7b7b77a4f8b8cf9ea7181ef.jpg" alt="Фильм 5">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Звёздные Войны</h3>
+                        <p>Медиафраншиза в жанре эпической космической оперы.</p>
+                        <br>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.1/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Фантастика</span>
+                            <span class="genre">Боевик</span>
+                            <span class="genre">Фентези</span>
+                            
+                        </div>
+                        <div class="watch">
+                            <a href="Страница 5.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Movie 6 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://i.scdn.co/image/ab67616d0000b273c3c0ca7a4929d96f2f1c5774" alt="Фильм 6">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Хороший, плохой, злой</h3>
+                        <p>Третья и самая масштабная часть "Доллоровой" трилогии Серджио Леоне</p>
+                        <br>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.5/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Вестерн</span>
+                            <span class="genre">Криминал</span>
+                            <span class="genre">Боевик</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Страница 6.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Movie 7 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a00000198a30c2e0a2b2d3b3b63d61e1c19/600x900" alt="Фильм 5">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Достать ножи</h3>
+                        <p>Серия комедийных детективов с Дениэлом Крейгом.</p>
+                        <br>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.2/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Комедия</span>
+                            <span class="genre">Криминал</span>
+                            <span class="genre">Детектив</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Страница 7.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Movie 8 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/10835644/7ba879e0-0bd2-4e07-ba37-2f74d8f8fbee/600x900" alt="Фильм 5">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Красный шёлк</h3>
+                        <p>Поезд. Сибирь. Шпионы. </p>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>7.2/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Драма</span>
+                            <span class="genre">Детектив</span>
+                            <span class="genre">Боевик</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Страница 8.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                 <!-- Movie 9 -->
+                <div class="movie-card fade-in">
+                    <div class="movie-img">
+                        <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a0000019854f2d5c8ce13461055033ab990/600x900" alt="Фильм 5">
+                    </div>
+                    <div class="movie-info">
+                        <h3>Джентельмены</h3>
+                        <p>Гангстеры всех мастей делят наркоферму. Закрученная экшен-комедия Гая Ричи с Мэттью Макконахи и Хью Грантом.</p>
+                        <br>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.7/10</span>
+                        </div>
+                        <div class="genres">
+                            <span class="genre">Комедия</span>
+                            <span class="genre">Криминал</span>
+                            <span class="genre">Боевик</span>
+                        </div>
+                        <div class="watch">
+                            <a href="Страница 9.html" class="btn">Смотреть онлайн</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>О нашем проекте</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Мир Кино - это проект, созданный для настоящих ценителей кинематографа. Мы собираем самые интересные материалы о фильмах, актерах и режиссерах.</p>
+                    <p>Наша команда состоит из профессионалов, которые обожают кино и хотят делиться этой страстью с вами. Мы предлагаем обзоры, рецензии, новости и многое другое из мира кино.</p>
+                    <p>Присоединяйтесь к нашему сообществу, чтобы быть в курсе всех кинопремьер и событий индустрии!</p>
+                    <br>
+                    <a href="#contact" class="btn">Связаться с нами</a>
+                </div>
+                <div class="about-img">
+                    <img src="https://habrastorage.org/getpro/habr/upload_files/f5f/600/add/f5f600add6a94a29b7b2b60c285853f5.gif" alt="О проекте">
+                </div>
+            </div>
+            
+            <div class="section-title">
+           <h2>Известные актеры</h2>
+</div>
+<div class="actors">
+    <div class="actor">
+        <a href="https://ru.wikipedia.org/wiki/ДиКаприо,_Леонардо" class="actor-link">
+            <div class="actor-img">
+                <img src="https://avatars.mds.yandex.net/i?id=153d3f8cabac97971d7a6c0e605180ca_l-10877393-images-thumbs&n=13" alt="Леонардо ДиКаприо">
+            </div>
+            <h3>Леонардо ДиКаприо</h3>
+        </a>
+    </div>
+    
+    <div class="actor">
+        <a href="https://ru.wikipedia.org/wiki/Стрип,_Мерил" class="actor-link">
+            <div class="actor-img">
+                <img src="https://avatars.mds.yandex.net/i?id=b4b931ccc46d0ae5f02e01beb3690a0d02714f2e-8229244-images-thumbs&n=13" alt="Мерил Стрип">
+            </div>
+            <h3>Мерил Стрип</h3>
+        </a>
+    </div>
+    
+    <div class="actor">
+        <a href="https://ru.wikipedia.org/wiki/Хэнкс,_Том" class="actor-link">
+            <div class="actor-img">
+                <img src="https://avatars.mds.yandex.net/i?id=9c39e1f2550058166703b8d641389927be62595c-4566892-images-thumbs&n=13" alt="Том Хэнкс">
+            </div>
+            <h3>Том Хэнкс</h3>
+        </a>
+    </div>
+    
+    <div class="actor">
+        <a href="https://ru.wikipedia.org/wiki/Йоханссон,_Скарлетт" class="actor-link">
+            <div class="actor-img">
+                <img src="https://avatars.mds.yandex.net/i?id=21dfea20448b562cb41ced6aaab57e233af07496-5260221-images-thumbs&n=13" alt="Скарлетт Йоханссон">
+            </div>
+            <h3>Скарлетт Йоханссон</h3>
+        </a>
+    </div>
+
+    <div class="actor">
+        <a href="https://ru.wikipedia.org/wiki/Мерфи,_Киллиан" class="actor-link">
+            <div class="actor-img">
+                <img src="https://avatars.mds.yandex.net/i?id=2a84ddf7a0c882189edc612257e5e65c20785255-5239608-images-thumbs&n=13" alt="Килиан Мёрфи">
+            </div>
+            <h3>Килиан Мёрфи</h3>
+        </a>
+    </div>
+    
+     <div class="actor">
+        <a href="https://ru.wikipedia.org/wiki/Круз,_Том" class="actor-link">
+            <div class="actor-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835375034251%29.jpg/500px-Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835375034251%29.jpg" alt="Том Круз">
+            </div>
+            <h3>Том Круз</h3>
+        </a>
+    </div>
+
+     <div class="actor">
+        <a href="https://ru.wikipedia.org/wiki/Депп,_Джонни" class="actor-link">
+            <div class="actor-img">
+                <img src="https://avatars.mds.yandex.net/i?id=5891ee09246e4de64e5a5420a70cf962_l-10594781-images-thumbs&n=13" alt="Джонни Депп">
+            </div>
+            <h3>Джонни Депп</h3>
+        </a>
+    </div>
+
+</div>
+</div>
+</section>
+
+    <!-- News Section -->
+   <section id="news">
+    <div class="container">
+        <div class="section-title">
+            <h2>Новости кино</h2>
+        </div>
+        <div class="news-grid">
+            <a href="https://ru.wikipedia.org/wiki/Одиссея_(фильм,_2026)" class="news-card fade-in">
+                <div class="news-img">
+                    <img src="https://avatars.mds.yandex.net/i?id=22e2a2cf55f231abc58bf64d359ac80993869dbb-4936359-images-thumbs&n=13" alt="Новый фильм Кристофера Нолана">
+                </div>
+                <div class="news-info">
+                    <h3>Новый фильм Кристофера Нолана выходит в октябре</h3>
+                    <p>Известный режиссер анонсировал свою новую работу в жанре фэнтези с впечатляющим актерским составом.</p>
+                    <span class="btn">Читать далее</span>
+                </div>
+            </a>
+            
+            <a href="https://www.festival-cannes.com/en/" class="news-card fade-in">
+                <div class="news-img">
+                    <img src="https://i.pinimg.com/736x/41/17/a8/4117a82e64ce37c30d8b4475da9a9780.jpg" alt="Каннский кинофестиваль">
+                </div>
+                <div class="news-info">
+                    <h3>Каннский кинофестиваль объявил программу</h3>
+                    <p>Организаторы представили список фильмов, которые будут бороться за главный приз фестиваля в этом году.</p>
+                    <span class="btn">Читать далее</span>
+                </div>
+            </a>
+            
+            <a href="https://www.oscars.org/" class="news-card fade-in">
+                <div class="news-img">
+                    <img src="https://avatars.mds.yandex.net/i?id=4e52e6e01965cfc5f22911872e9e061abc7098ec-12533415-images-thumbs&n=13" alt="Номинанты на премию Оскар">
+                </div>
+                <div class="news-info">
+                    <h3>Объявлены номинанты на премию Оскар</h3>
+                    <p>Американская киноакадемия опубликовала список претендентов на главную кинопремию года.</p>
+                    <span class="btn">Читать далее</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Связь с нами</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" placeholder="Введите ваше имя">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Ваш email</label>
+                            <input type="email" id="email" placeholder="Введите ваш email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" placeholder="Напишите ваше сообщение"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить сообщение</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-box">
+                        <h3>Контактная информация</h3>
+                        <p><i class="fas fa-phone"></i> +7 (985) 023-89-58</p>
+                        <p><i class="fas fa-envelope"></i> efimov.r.g@edu.mirea.ru</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Пр. Вернадского, 78</p>
+                        
+                        <div class="social-links">
+                            <a href="https://vk.com/id746927124"><i class="fab fa-vk"></i></a>
+                            <a href="#"><i class="fab fa-telegram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                        <br>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2250.0957343418004!2d37.47772497677752!3d55.66993537305363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54dc1d23b51c3%3A0x74763ed59c81ccb6!2z0KDQotCjINCc0JjQoNCt0JA!5e0!3m2!1sru!2sru!4v1760596780404!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Мир Кино</div>
+                <ul class="footer-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#movies">Фильмы</a></li>
+                    <li><a href="#about">О проекте</a></li>
+                    <li><a href="#news">Новости</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Мир Кино. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Система уведомлений
+        class NotificationSystem {
+            constructor() {
+                this.notifications = JSON.parse(localStorage.getItem('movieNotifications')) || [];
+                this.unreadCount = this.notifications.filter(n => !n.read).length;
+                this.init();
+            }
+
+            init() {
+                this.renderNotifications();
+                this.setupEventListeners();
+                
+                // Симуляция добавления нового фильма (для демонстрации)
+                this.simulateNewMovieAddition();
+            }
+
+            // Добавление нового уведомления о фильме
+            addMovieNotification(movieTitle, movieDescription, movieImage) {
+                const newNotification = {
+                    id: Date.now(),
+                    type: 'new_movie',
+                    title: 'Добавлен новый фильм',
+                    message: `"${movieTitle}" - ${movieDescription}`,
+                    time: 'Только что',
+                    read: false,
+                    movieData: {
+                        title: movieTitle,
+                        description: movieDescription,
+                        image: movieImage
+                    }
+                };
+
+                this.notifications.unshift(newNotification);
+                this.unreadCount++;
+                this.saveToLocalStorage();
+                this.renderNotifications();
+                this.showNotificationToast(newNotification);
+            }
+
+            // Добавление уведомления об обновлении
+            addUpdateNotification(title, message) {
+                const newNotification = {
+                    id: Date.now(),
+                    type: 'update',
+                    title: title,
+                    message: message,
+                    time: 'Только что',
+                    read: false
+                };
+
+                this.notifications.unshift(newNotification);
+                this.unreadCount++;
+                this.saveToLocalStorage();
+                this.renderNotifications();
+                this.showNotificationToast(newNotification);
+            }
+
+            // Показать тост-уведомление
+            showNotificationToast(notification) {
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: #1a1a2e;
+                    color: white;
+                    padding: 15px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    max-width: 300px;
+                    border-left: 4px solid #e50914;
+                    transform: translateX(400px);
+                    transition: transform 0.3s ease;
+                    cursor: pointer;
+                `;
+                
+                toast.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 5px; color: #e50914;">${notification.title}</div>
+                    <div style="font-size: 14px; color: #ccc;">${notification.message}</div>
+                    <div style="font-size: 12px; color: #666; margin-top: 5px;">${notification.time}</div>
+                `;
+
+                document.body.appendChild(toast);
+
+                // Анимация появления
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(0)';
+                }, 100);
+
+                // Автоматическое скрытие
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(400px)';
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 300);
+                }, 5000);
+
+                // Клик по тосту
+                toast.addEventListener('click', () => {
+                    this.markAsRead(notification.id);
+                    toast.style.transform = 'translateX(400px)';
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 300);
+                });
+            }
+
+            // Отметить как прочитанное
+            markAsRead(notificationId) {
+                const notification = this.notifications.find(n => n.id === notificationId);
+                if (notification && !notification.read) {
+                    notification.read = true;
+                    this.unreadCount--;
+                    this.saveToLocalStorage();
+                    this.renderNotifications();
+                }
+            }
+
+            // Отметить все как прочитанные
+            markAllAsRead() {
+                this.notifications.forEach(notification => {
+                    notification.read = true;
+                });
+                this.unreadCount = 0;
+                this.saveToLocalStorage();
+                this.renderNotifications();
+            }
+
+            // Отрисовка уведомлений
+            renderNotifications() {
+                const notificationList = document.getElementById('notification-list');
+                const counter = document.getElementById('notification-counter');
+                const unreadCount = document.getElementById('unread-count');
+
+                // Обновляем счетчики
+                counter.textContent = this.unreadCount;
+                unreadCount.textContent = `${this.unreadCount} новых`;
+
+                // Скрываем/показываем бейдж
+                counter.style.display = this.unreadCount > 0 ? 'flex' : 'none';
+
+                // Очищаем список
+                notificationList.innerHTML = '';
+
+                // Добавляем уведомления
+                if (this.notifications.length === 0) {
+                    const emptyItem = document.createElement('div');
+                    emptyItem.className = 'notification-item';
+                    emptyItem.innerHTML = `
+                        <div class="notification-message" style="text-align: center; color: #666;">
+                            Уведомлений пока нет
+                        </div>
+                    `;
+                    notificationList.appendChild(emptyItem);
+                } else {
+                    this.notifications.slice(0, 10).forEach(notification => {
+                        const item = document.createElement('div');
+                        item.className = `notification-item ${notification.read ? '' : 'notification-unread'}`;
+                        item.innerHTML = `
+                            <div class="notification-title">${notification.title}</div>
+                            <div class="notification-message">${notification.message}</div>
+                            <div class="notification-time">${notification.time}</div>
+                        `;
+                        
+                        item.addEventListener('click', () => {
+                            this.markAsRead(notification.id);
+                            if (notification.type === 'new_movie') {
+                                window.location.href = '#movies';
+                            }
+                        });
+
+                        notificationList.appendChild(item);
+                    });
+                }
+            }
+
+            // Настройка обработчиков событий
+            setupEventListeners() {
+                const markAllReadBtn = document.getElementById('mark-all-read');
+                if (markAllReadBtn) {
+                    markAllReadBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.markAllAsRead();
+                    });
+                }
+            }
+
+            // Сохранение в LocalStorage
+            saveToLocalStorage() {
+                localStorage.setItem('movieNotifications', JSON.stringify(this.notifications));
+            }
+
+            // Симуляция добавления новых фильмов (для демонстрации)
+            simulateNewMovieAddition() {
+                const demoAdded = localStorage.getItem('demoNotificationsAdded');
+                
+                if (!demoAdded) {
+                    setTimeout(() => {
+                        this.addMovieNotification(
+                            'Интерстеллар',
+                            'Фантастический эпос о путешествии через червоточину в поисках нового дома для человечества',
+                            'https://example.com/interstellar.jpg'
+                        );
+                    }, 2000);
+
+                    setTimeout(() => {
+                        this.addUpdateNotification(
+                            'Обновление сайта',
+                            'Добавлены новые разделы и улучшена навигация'
+                        );
+                    }, 5000);
+
+                    setTimeout(() => {
+                        this.addMovieNotification(
+                            'Начало',
+                            'Фильм о мастере шпионажа, который использует технологию внедрения в сны',
+                            'https://example.com/inception.jpg'
+                        );
+                    }, 8000);
+
+                    localStorage.setItem('demoNotificationsAdded', 'true');
+                }
+            }
+
+            // Метод для добавления уведомления при реальном добавлении фильма
+            onNewMovieAdded(movieData) {
+                this.addMovieNotification(
+                    movieData.title,
+                    movieData.description,
+                    movieData.image
+                );
+            }
+
+            // Метод для добавления уведомления об обновлении сайта
+            onSiteUpdate(updateMessage) {
+                this.addUpdateNotification('Обновление сайта', updateMessage);
+            }
+        }
+
+        // Инициализация системы уведомлений при загрузке страницы
+        let notificationSystem;
+        document.addEventListener('DOMContentLoaded', function() {
+            notificationSystem = new NotificationSystem();
+            
+            // Все остальные существующие функции остаются без изменений
+            // Плавная прокрутка к якорям
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Анимация появления элементов при прокрутке
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const fadeInObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, fadeInOptions);
+            
+            fadeElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transition = 'opacity 0.8s ease';
+                fadeInObserver.observe(element);
+            });
+            
+            // Обработка формы
+            const contactForm = document.querySelector('.contact-form form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
