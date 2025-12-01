@@ -225,6 +225,15 @@
             background: #2a2a3e;
         }
 
+        /* Стили для страниц */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+
         /* Остальные существующие стили остаются без изменений */
         .hero {
             height: 100vh;
@@ -779,16 +788,16 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">
+                <a href="#" class="logo" onclick="showPage('home')">
                     <i class="fas fa-film"></i>Мир Кино
                 </a>
                 <nav>
                     <ul>
-                        <li><a href="#home">Главная</a></li>
-                        <li><a href="#movies">Фильмы</a></li>
-                        <li><a href="#about">О проекте</a></li>
-                        <li><a href="#news">Новости</a></li>
-                        <li><a href="#contact">Контакты</a></li>
+                        <li><a href="#" onclick="showPage('home')">Главная</a></li>
+                        <li><a href="#" onclick="showPage('movies')">Фильмы</a></li>
+                        <li><a href="#" onclick="showPage('about')">О проекте</a></li>
+                        <li><a href="#" onclick="showPage('news')">Новости</a></li>
+                        <li><a href="#" onclick="showPage('contact')">Контакты</a></li>
                         <!-- Добавляем иконку уведомлений в навигацию -->
                         <li class="nav-notifications">
                             <div class="notification-icon">
@@ -817,429 +826,435 @@
         </div>
     </header>
 
-    <!-- Весь остальной HTML код остается без изменений -->
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Откройте для себя мир кинематографа</h1>
-                <p>Узнавайте о новинках кино, читайте интересные статьи и находите вдохновение в мире большого кино</p>
-                <a href="#movies" class="btn">Смотреть подборку</a>
+    <!-- Главная страница (активна по умолчанию) -->
+    <div id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Откройте для себя мир кинематографа</h1>
+                    <p>Узнавайте о новинках кино, читайте интересные статьи и находите вдохновение в мире большого кино</p>
+                    <a href="#" class="btn" onclick="showPage('movies')">Смотреть подборку</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Movies Section -->
-    <section id="movies">
-        <div class="container">
-            <div class="section-title">
-                <h2>Популярные кинокартины</h2>
+    <!-- Страница с фильмами -->
+    <div id="movies-page" class="page">
+        <section style="padding: 100px 0 80px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Популярные кинокартины</h2>
+                </div>
+                <div class="movies-grid">
+                    <!-- Movie 1 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="http://images-s.kinorium.com/movie/poster/573759/w1500_41129997.jpg" alt="Фильм 1">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Бегущий по лезвию 2049</h3>
+                            <p>Фантастический боевик о будущем, где человекоподобные роботы сосуществуют с людьми.</p>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.0/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Фантастика</span>
+                                <span class="genre">Боевик</span>
+                                <span class="genre">Драма</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Старница 1.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 2 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/0fa5bf50-d5ad-446f-a599-b26d070c8b99/600x900" alt="Фильм 2">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Трилогия о Тёмном рыцаре</h3>
+                            <p>Серия супергеройских боевиков с элементами неонуара режиссёра Кристофера Нолана по комиксам DC Comics.</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.9/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Драма</span>
+                                <span class="genre">Боевик</span>
+                                <span class="genre">Супергероика</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Страница 2.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 3 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://avatars.mds.yandex.net/get-mpic/15608342/2a00000196d897d0a6fe958bd08f4ed89912/orig" alt="Фильм 3">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Властелин Колец</h3>
+                            <p>Эпическое путешествие по Средиземью с целью уничтожения Кольца Всевластия.</p>
+                            <br>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.9/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Фэнтези</span>
+                                <span class="genre">Приключения</span>
+                                <span class="genre">Экшен</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Страница 4.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 4 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://avatars.mds.yandex.net/i?id=960c5c4188ac6e41935c0048d0b8ae43aa40ed74-9570000-images-thumbs&n=13" alt="Фильм 4">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Сияние</h3>
+                            <p>Писатель с семьей переезжает в отдаленный отель, где на него влияют сверхъестественные силы.</p>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.4/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Ужасы</span>
+                                <span class="genre">Драма</span>
+                                <span class="genre">Мистика</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Старница 3.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Movie 5 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://i.pinimg.com/736x/6a/43/4d/6a434dd2b7b7b77a4f8b8cf9ea7181ef.jpg" alt="Фильм 5">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Звёздные Войны</h3>
+                            <p>Медиафраншиза в жанре эпической космической оперы.</p>
+                            <br>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.1/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Фантастика</span>
+                                <span class="genre">Боевик</span>
+                                <span class="genre">Фентези</span>
+                                
+                            </div>
+                            <div class="watch">
+                                <a href="Страница 5.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Movie 6 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://i.scdn.co/image/ab67616d0000b273c3c0ca7a4929d96f2f1c5774" alt="Фильм 6">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Хороший, плохой, злой</h3>
+                            <p>Третья и самая масштабная часть "Доллоровой" трилогии Серджио Леоне</p>
+                            <br>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.5/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Вестерн</span>
+                                <span class="genre">Криминал</span>
+                                <span class="genre">Боевик</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Страница 6.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Movie 7 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a00000198a30c2e0a2b2d3b3b63d61e1c19/600x900" alt="Фильм 5">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Достать ножи</h3>
+                            <p>Серия комедийных детективов с Дениэлом Крейгом.</p>
+                            <br>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.2/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Комедия</span>
+                                <span class="genre">Криминал</span>
+                                <span class="genre">Детектив</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Страница 7.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Movie 8 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/10835644/7ba879e0-0bd2-4e07-ba37-2f74d8f8fbee/600x900" alt="Фильм 5">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Красный шёлк</h3>
+                            <p>Поезд. Сибирь. Шпионы. </p>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>7.2/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Драма</span>
+                                <span class="genre">Детектив</span>
+                                <span class="genre">Боевик</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Страница 8.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Movie 9 -->
+                    <div class="movie-card fade-in">
+                        <div class="movie-img">
+                            <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a0000019854f2d5c8ce13461055033ab990/600x900" alt="Фильм 5">
+                        </div>
+                        <div class="movie-info">
+                            <h3>Джентельмены</h3>
+                            <p>Гангстеры всех мастей делят наркоферму. Закрученная экшен-комедия Гая Ричи с Мэттью Макконахи и Хью Грантом.</p>
+                            <br>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>8.7/10</span>
+                            </div>
+                            <div class="genres">
+                                <span class="genre">Комедия</span>
+                                <span class="genre">Криминал</span>
+                                <span class="genre">Боевик</span>
+                            </div>
+                            <div class="watch">
+                                <a href="Страница 9.html" class="btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="movies-grid">
-                <!-- Movie 1 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="http://images-s.kinorium.com/movie/poster/573759/w1500_41129997.jpg" alt="Фильм 1">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Бегущий по лезвию 2049</h3>
-                        <p>Фантастический боевик о будущем, где человекоподобные роботы сосуществуют с людьми.</p>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.0/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Фантастика</span>
-                            <span class="genre">Боевик</span>
-                            <span class="genre">Драма</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Старница 1.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Movie 2 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/0fa5bf50-d5ad-446f-a599-b26d070c8b99/600x900" alt="Фильм 2">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Трилогия о Тёмном рыцаре</h3>
-                        <p>Серия супергеройских боевиков с элементами неонуара режиссёра Кристофера Нолана по комиксам DC Comics.</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.9/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Драма</span>
-                            <span class="genre">Боевик</span>
-                            <span class="genre">Супергероика</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Страница 2.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Movie 3 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://avatars.mds.yandex.net/get-mpic/15608342/2a00000196d897d0a6fe958bd08f4ed89912/orig" alt="Фильм 3">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Властелин Колец</h3>
-                        <p>Эпическое путешествие по Средиземью с целью уничтожения Кольца Всевластия.</p>
-                        <br>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.9/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Фэнтези</span>
-                            <span class="genre">Приключения</span>
-                            <span class="genre">Экшен</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Страница 4.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Movie 4 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://avatars.mds.yandex.net/i?id=960c5c4188ac6e41935c0048d0b8ae43aa40ed74-9570000-images-thumbs&n=13" alt="Фильм 4">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Сияние</h3>
-                        <p>Писатель с семьей переезжает в отдаленный отель, где на него влияют сверхъестественные силы.</p>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.4/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Ужасы</span>
-                            <span class="genre">Драма</span>
-                            <span class="genre">Мистика</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Старница 3.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
+        </section>
+    </div>
 
-                 <!-- Movie 5 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://i.pinimg.com/736x/6a/43/4d/6a434dd2b7b7b77a4f8b8cf9ea7181ef.jpg" alt="Фильм 5">
+    <!-- Страница "О проекте" -->
+    <div id="about-page" class="page">
+        <section style="padding: 100px 0 80px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>О нашем проекте</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Мир Кино - это проект, созданный для настоящих ценителей кинематографа. Мы собираем самые интересные материалы о фильмах, актерах и режиссерах.</p>
+                        <p>Наша команда состоит из профессионалов, которые обожают кино и хотят делиться этой страстью с вами. Мы предлагаем обзоры, рецензии, новости и многое другое из мира кино.</p>
+                        <p>Присоединяйтесь к нашему сообществу, чтобы быть в курсе всех кинопремьер и событий индустрии!</p>
+                        <br>
+                        <a href="#" class="btn" onclick="showPage('contact')">Связаться с нами</a>
                     </div>
-                    <div class="movie-info">
-                        <h3>Звёздные Войны</h3>
-                        <p>Медиафраншиза в жанре эпической космической оперы.</p>
-                        <br>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.1/10</span>
+                    <div class="about-img">
+                        <img src="https://habrastorage.org/getpro/habr/upload_files/f5f/600/add/f5f600add6a94a29b7b2b60c285853f5.gif" alt="О проекте">
+                    </div>
+                </div>
+                
+                <div class="section-title">
+                    <h2>Известные актеры</h2>
+                </div>
+                <div class="actors">
+                    <div class="actor">
+                        <a href="https://ru.wikipedia.org/wiki/ДиКаприо,_Леонардо" class="actor-link" target="_blank">
+                            <div class="actor-img">
+                                <img src="https://avatars.mds.yandex.net/i?id=153d3f8cabac97971d7a6c0e605180ca_l-10877393-images-thumbs&n=13" alt="Леонардо ДиКаприо">
+                            </div>
+                            <h3>Леонардо ДиКаприо</h3>
+                        </a>
+                    </div>
+                    
+                    <div class="actor">
+                        <a href="https://ru.wikipedia.org/wiki/Стрип,_Мерил" class="actor-link" target="_blank">
+                            <div class="actor-img">
+                                <img src="https://avatars.mds.yandex.net/i?id=b4b931ccc46d0ae5f02e01beb3690a0d02714f2e-8229244-images-thumbs&n=13" alt="Мерил Стрип">
+                            </div>
+                            <h3>Мерил Стрип</h3>
+                        </a>
+                    </div>
+                    
+                    <div class="actor">
+                        <a href="https://ru.wikipedia.org/wiki/Хэнкс,_Том" class="actor-link" target="_blank">
+                            <div class="actor-img">
+                                <img src="https://avatars.mds.yandex.net/i?id=9c39e1f2550058166703b8d641389927be62595c-4566892-images-thumbs&n=13" alt="Том Хэнкс">
+                            </div>
+                            <h3>Том Хэнкс</h3>
+                        </a>
+                    </div>
+                    
+                    <div class="actor">
+                        <a href="https://ru.wikipedia.org/wiki/Йоханссон,_Скарлетт" class="actor-link" target="_blank">
+                            <div class="actor-img">
+                                <img src="https://avatars.mds.yandex.net/i?id=21dfea20448b562cb41ced6aaab57e233af07496-5260221-images-thumbs&n=13" alt="Скарлетт Йоханссон">
+                            </div>
+                            <h3>Скарлетт Йоханссон</h3>
+                        </a>
+                    </div>
+
+                    <div class="actor">
+                        <a href="https://ru.wikipedia.org/wiki/Мерфи,_Киллиан" class="actor-link" target="_blank">
+                            <div class="actor-img">
+                                <img src="https://avatars.mds.yandex.net/i?id=2a84ddf7a0c882189edc612257e5e65c20785255-5239608-images-thumbs&n=13" alt="Килиан Мёрфи">
+                            </div>
+                            <h3>Килиан Мёрфи</h3>
+                        </a>
+                    </div>
+                    
+                    <div class="actor">
+                        <a href="https://ru.wikipedia.org/wiki/Круз,_Том" class="actor-link" target="_blank">
+                            <div class="actor-img">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835375034251%29.jpg/500px-Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835375034251%29.jpg" alt="Том Круз">
+                            </div>
+                            <h3>Том Круз</h3>
+                        </a>
+                    </div>
+
+                    <div class="actor">
+                        <a href="https://ru.wikipedia.org/wiki/Депп,_Джонни" class="actor-link" target="_blank">
+                            <div class="actor-img">
+                                <img src="https://avatars.mds.yandex.net/i?id=5891ee09246e4de64e5a5420a70cf962_l-10594781-images-thumbs&n=13" alt="Джонни Депп">
+                            </div>
+                            <h3>Джонни Депп</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Страница "Новости" -->
+    <div id="news-page" class="page">
+        <section style="padding: 100px 0 80px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Новости кино</h2>
+                </div>
+                <div class="news-grid">
+                    <a href="https://ru.wikipedia.org/wiki/Одиссея_(фильм,_2026)" class="news-card fade-in" target="_blank">
+                        <div class="news-img">
+                            <img src="https://avatars.mds.yandex.net/i?id=22e2a2cf55f231abc58bf64d359ac80993869dbb-4936359-images-thumbs&n=13" alt="Новый фильм Кристофера Нолана">
                         </div>
-                        <div class="genres">
-                            <span class="genre">Фантастика</span>
-                            <span class="genre">Боевик</span>
-                            <span class="genre">Фентези</span>
+                        <div class="news-info">
+                            <h3>Новый фильм Кристофера Нолана выходит в октябре</h3>
+                            <p>Известный режиссер анонсировал свою новую работу в жанре фэнтези с впечатляющим актерским составом.</p>
+                            <span class="btn">Читать далее</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.festival-cannes.com/en/" class="news-card fade-in" target="_blank">
+                        <div class="news-img">
+                            <img src="https://i.pinimg.com/736x/41/17/a8/4117a82e64ce37c30d8b4475da9a9780.jpg" alt="Каннский кинофестиваль">
+                        </div>
+                        <div class="news-info">
+                            <h3>Каннский кинофестиваль объявил программу</h3>
+                            <p>Организаторы представили список фильмов, которые будут бороться за главный приз фестиваля в этом году.</p>
+                            <span class="btn">Читать далее</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.oscars.org/" class="news-card fade-in" target="_blank">
+                        <div class="news-img">
+                            <img src="https://avatars.mds.yandex.net/i?id=4e52e6e01965cfc5f22911872e9e061abc7098ec-12533415-images-thumbs&n=13" alt="Номинанты на премию Оскар">
+                        </div>
+                        <div class="news-info">
+                            <h3>Объявлены номинанты на премию Оскар</h3>
+                            <p>Американская киноакадемия опубликовала список претендентов на главную кинопремию года.</p>
+                            <span class="btn">Читать далее</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Страница "Контакты" -->
+    <div id="contact-page" class="page">
+        <section style="padding: 100px 0 80px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Связь с нами</h2>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-form">
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Ваше имя</label>
+                                <input type="text" id="name" placeholder="Введите ваше имя">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Ваш email</label>
+                                <input type="email" id="email" placeholder="Введите ваш email">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Сообщение</label>
+                                <textarea id="message" placeholder="Напишите ваше сообщение"></textarea>
+                            </div>
+                            <button type="submit" class="btn">Отправить сообщение</button>
+                        </form>
+                    </div>
+                    <div class="contact-info">
+                        <div class="info-box">
+                            <h3>Контактная информация</h3>
+                            <p><i class="fas fa-phone"></i> +7 (985) 023-89-58</p>
+                            <p><i class="fas fa-envelope"></i> efimov.r.g@edu.mirea.ru</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Пр. Вернадского, 78</p>
                             
-                        </div>
-                        <div class="watch">
-                            <a href="Страница 5.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Movie 6 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://i.scdn.co/image/ab67616d0000b273c3c0ca7a4929d96f2f1c5774" alt="Фильм 6">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Хороший, плохой, злой</h3>
-                        <p>Третья и самая масштабная часть "Доллоровой" трилогии Серджио Леоне</p>
-                        <br>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.5/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Вестерн</span>
-                            <span class="genre">Криминал</span>
-                            <span class="genre">Боевик</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Страница 6.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Movie 7 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a00000198a30c2e0a2b2d3b3b63d61e1c19/600x900" alt="Фильм 5">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Достать ножи</h3>
-                        <p>Серия комедийных детективов с Дениэлом Крейгом.</p>
-                        <br>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.2/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Комедия</span>
-                            <span class="genre">Криминал</span>
-                            <span class="genre">Детектив</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Страница 7.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Movie 8 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/10835644/7ba879e0-0bd2-4e07-ba37-2f74d8f8fbee/600x900" alt="Фильм 5">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Красный шёлк</h3>
-                        <p>Поезд. Сибирь. Шпионы. </p>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>7.2/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Драма</span>
-                            <span class="genre">Детектив</span>
-                            <span class="genre">Боевик</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Страница 8.html" class="btn">Смотреть онлайн</a>
-                        </div>
-                    </div>
-                </div>
-
-                
-
-                 <!-- Movie 9 -->
-                <div class="movie-card fade-in">
-                    <div class="movie-img">
-                        <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a0000019854f2d5c8ce13461055033ab990/600x900" alt="Фильм 5">
-                    </div>
-                    <div class="movie-info">
-                        <h3>Джентельмены</h3>
-                        <p>Гангстеры всех мастей делят наркоферму. Закрученная экшен-комедия Гая Ричи с Мэттью Макконахи и Хью Грантом.</p>
-                        <br>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <span>8.7/10</span>
-                        </div>
-                        <div class="genres">
-                            <span class="genre">Комедия</span>
-                            <span class="genre">Криминал</span>
-                            <span class="genre">Боевик</span>
-                        </div>
-                        <div class="watch">
-                            <a href="Страница 9.html" class="btn">Смотреть онлайн</a>
+                            <div class="social-links">
+                                <a href="https://vk.com/id746927124"><i class="fab fa-vk"></i></a>
+                                <a href="#"><i class="fab fa-telegram"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                            <br>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2250.0957343418004!2d37.47772497677752!3d55.66993537305363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54dc1d23b51c3%3A0x74763ed59c81ccb6!2z0KDQotCjINCc0JjQoNCt0JA!5e0!3m2!1sru!2sru!4v1760596780404!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-        
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>О нашем проекте</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Мир Кино - это проект, созданный для настоящих ценителей кинематографа. Мы собираем самые интересные материалы о фильмах, актерах и режиссерах.</p>
-                    <p>Наша команда состоит из профессионалов, которые обожают кино и хотят делиться этой страстью с вами. Мы предлагаем обзоры, рецензии, новости и многое другое из мира кино.</p>
-                    <p>Присоединяйтесь к нашему сообществу, чтобы быть в курсе всех кинопремьер и событий индустрии!</p>
-                    <br>
-                    <a href="#contact" class="btn">Связаться с нами</a>
-                </div>
-                <div class="about-img">
-                    <img src="https://habrastorage.org/getpro/habr/upload_files/f5f/600/add/f5f600add6a94a29b7b2b60c285853f5.gif" alt="О проекте">
-                </div>
-            </div>
-            
-            <div class="section-title">
-           <h2>Известные актеры</h2>
-</div>
-<div class="actors">
-    <div class="actor">
-        <a href="https://ru.wikipedia.org/wiki/ДиКаприо,_Леонардо" class="actor-link">
-            <div class="actor-img">
-                <img src="https://avatars.mds.yandex.net/i?id=153d3f8cabac97971d7a6c0e605180ca_l-10877393-images-thumbs&n=13" alt="Леонардо ДиКаприо">
-            </div>
-            <h3>Леонардо ДиКаприо</h3>
-        </a>
+        </section>
     </div>
-    
-    <div class="actor">
-        <a href="https://ru.wikipedia.org/wiki/Стрип,_Мерил" class="actor-link">
-            <div class="actor-img">
-                <img src="https://avatars.mds.yandex.net/i?id=b4b931ccc46d0ae5f02e01beb3690a0d02714f2e-8229244-images-thumbs&n=13" alt="Мерил Стрип">
-            </div>
-            <h3>Мерил Стрип</h3>
-        </a>
-    </div>
-    
-    <div class="actor">
-        <a href="https://ru.wikipedia.org/wiki/Хэнкс,_Том" class="actor-link">
-            <div class="actor-img">
-                <img src="https://avatars.mds.yandex.net/i?id=9c39e1f2550058166703b8d641389927be62595c-4566892-images-thumbs&n=13" alt="Том Хэнкс">
-            </div>
-            <h3>Том Хэнкс</h3>
-        </a>
-    </div>
-    
-    <div class="actor">
-        <a href="https://ru.wikipedia.org/wiki/Йоханссон,_Скарлетт" class="actor-link">
-            <div class="actor-img">
-                <img src="https://avatars.mds.yandex.net/i?id=21dfea20448b562cb41ced6aaab57e233af07496-5260221-images-thumbs&n=13" alt="Скарлетт Йоханссон">
-            </div>
-            <h3>Скарлетт Йоханссон</h3>
-        </a>
-    </div>
-
-    <div class="actor">
-        <a href="https://ru.wikipedia.org/wiki/Мерфи,_Киллиан" class="actor-link">
-            <div class="actor-img">
-                <img src="https://avatars.mds.yandex.net/i?id=2a84ddf7a0c882189edc612257e5e65c20785255-5239608-images-thumbs&n=13" alt="Килиан Мёрфи">
-            </div>
-            <h3>Килиан Мёрфи</h3>
-        </a>
-    </div>
-    
-     <div class="actor">
-        <a href="https://ru.wikipedia.org/wiki/Круз,_Том" class="actor-link">
-            <div class="actor-img">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835375034251%29.jpg/500px-Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835375034251%29.jpg" alt="Том Круз">
-            </div>
-            <h3>Том Круз</h3>
-        </a>
-    </div>
-
-     <div class="actor">
-        <a href="https://ru.wikipedia.org/wiki/Депп,_Джонни" class="actor-link">
-            <div class="actor-img">
-                <img src="https://avatars.mds.yandex.net/i?id=5891ee09246e4de64e5a5420a70cf962_l-10594781-images-thumbs&n=13" alt="Джонни Депп">
-            </div>
-            <h3>Джонни Депп</h3>
-        </a>
-    </div>
-
-</div>
-</div>
-</section>
-
-    <!-- News Section -->
-   <section id="news">
-    <div class="container">
-        <div class="section-title">
-            <h2>Новости кино</h2>
-        </div>
-        <div class="news-grid">
-            <a href="https://ru.wikipedia.org/wiki/Одиссея_(фильм,_2026)" class="news-card fade-in">
-                <div class="news-img">
-                    <img src="https://avatars.mds.yandex.net/i?id=22e2a2cf55f231abc58bf64d359ac80993869dbb-4936359-images-thumbs&n=13" alt="Новый фильм Кристофера Нолана">
-                </div>
-                <div class="news-info">
-                    <h3>Новый фильм Кристофера Нолана выходит в октябре</h3>
-                    <p>Известный режиссер анонсировал свою новую работу в жанре фэнтези с впечатляющим актерским составом.</p>
-                    <span class="btn">Читать далее</span>
-                </div>
-            </a>
-            
-            <a href="https://www.festival-cannes.com/en/" class="news-card fade-in">
-                <div class="news-img">
-                    <img src="https://i.pinimg.com/736x/41/17/a8/4117a82e64ce37c30d8b4475da9a9780.jpg" alt="Каннский кинофестиваль">
-                </div>
-                <div class="news-info">
-                    <h3>Каннский кинофестиваль объявил программу</h3>
-                    <p>Организаторы представили список фильмов, которые будут бороться за главный приз фестиваля в этом году.</p>
-                    <span class="btn">Читать далее</span>
-                </div>
-            </a>
-            
-            <a href="https://www.oscars.org/" class="news-card fade-in">
-                <div class="news-img">
-                    <img src="https://avatars.mds.yandex.net/i?id=4e52e6e01965cfc5f22911872e9e061abc7098ec-12533415-images-thumbs&n=13" alt="Номинанты на премию Оскар">
-                </div>
-                <div class="news-info">
-                    <h3>Объявлены номинанты на премию Оскар</h3>
-                    <p>Американская киноакадемия опубликовала список претендентов на главную кинопремию года.</p>
-                    <span class="btn">Читать далее</span>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Связь с нами</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Ваше имя</label>
-                            <input type="text" id="name" placeholder="Введите ваше имя">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Ваш email</label>
-                            <input type="email" id="email" placeholder="Введите ваш email">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Сообщение</label>
-                            <textarea id="message" placeholder="Напишите ваше сообщение"></textarea>
-                        </div>
-                        <button type="submit" class="btn">Отправить сообщение</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="info-box">
-                        <h3>Контактная информация</h3>
-                        <p><i class="fas fa-phone"></i> +7 (985) 023-89-58</p>
-                        <p><i class="fas fa-envelope"></i> efimov.r.g@edu.mirea.ru</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Пр. Вернадского, 78</p>
-                        
-                        <div class="social-links">
-                            <a href="https://vk.com/id746927124"><i class="fab fa-vk"></i></a>
-                            <a href="#"><i class="fab fa-telegram"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                        </div>
-                        <br>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2250.0957343418004!2d37.47772497677752!3d55.66993537305363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54dc1d23b51c3%3A0x74763ed59c81ccb6!2z0KDQotCjINCc0JjQoNCt0JA!5e0!3m2!1sru!2sru!4v1760596780404!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer>
@@ -1247,11 +1262,11 @@
             <div class="footer-content">
                 <div class="footer-logo">Мир Кино</div>
                 <ul class="footer-links">
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#movies">Фильмы</a></li>
-                    <li><a href="#about">О проекте</a></li>
-                    <li><a href="#news">Новости</a></li>
-                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="#" onclick="showPage('home')">Главная</a></li>
+                    <li><a href="#" onclick="showPage('movies')">Фильмы</a></li>
+                    <li><a href="#" onclick="showPage('about')">О проекте</a></li>
+                    <li><a href="#" onclick="showPage('news')">Новости</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Контакты</a></li>
                 </ul>
             </div>
             
@@ -1262,6 +1277,26 @@
     </footer>
 
     <script>
+        // Функция для отображения страницы
+        function showPage(pageId) {
+            // Скрываем все страницы
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показываем выбранную страницу
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Прокручиваем наверх
+            window.scrollTo(0, 0);
+            
+            return false;
+        }
+
         // Система уведомлений
         class NotificationSystem {
             constructor() {
@@ -1433,9 +1468,6 @@
                         
                         item.addEventListener('click', () => {
                             this.markAsRead(notification.id);
-                            if (notification.type === 'new_movie') {
-                                window.location.href = '#movies';
-                            }
                         });
 
                         notificationList.appendChild(item);
@@ -1511,25 +1543,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             notificationSystem = new NotificationSystem();
             
-            // Все остальные существующие функции остаются без изменений
-            // Плавная прокрутка к якорям
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
             // Анимация появления элементов при прокрутке
             const fadeElements = document.querySelectorAll('.fade-in');
             
@@ -1554,7 +1567,7 @@
             });
             
             // Обработка формы
-            const contactForm = document.querySelector('.contact-form form');
+            const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
